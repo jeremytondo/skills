@@ -7,21 +7,36 @@ description: Explore a rough project idea, notes, issue, design document, README
 
 Use this skill to turn rough source material and discussion into a concise `BRIEF.md`.
 
-The brief is a handoff artifact for a later `SPEC.md`. It is not a formal spec, build plan, phase plan, milestone list, or task breakdown.
+The brief is a sharp synthesis artifact. It should clarify what the idea is, why it matters, what shape it appears to have, and what remains unresolved. It is not a formal spec, build plan, phase plan, milestone list, task breakdown, or spec-authoring guide.
+
+## Brief Style
+
+Keep the brief scannable and decision-dense.
+
+- Prefer short paragraphs or bullets over long prose.
+- Use bullets when a section contains multiple distinct claims, recommendations, capabilities, constraints, or open questions.
+- Keep prose sections to one short paragraph unless narrative context is genuinely needed.
+- Do not let `Purpose`, `Recommended Direction`, or `System Shape` become essay-like. Break them into bullets when they start carrying several ideas.
+- Preserve nuance through precise bullets rather than longer explanation.
+- Write the brief as the new source of truth for the idea, not as commentary on the source material.
+- Avoid source-referential phrasing such as "the source idea describes," "the notes say," "the original file mentions," or "the user wants" unless provenance itself is important.
+- Convert source material into direct project statements: say what the project is, should do, or should avoid.
 
 ## Required Resource
 
-Read `brief-template.md` before drafting. Use it as the required structure for `BRIEF.md` unless the user explicitly provides a different template.
+Read `brief-template.md` before drafting. Use it as the default structure for `brief.md` unless the user explicitly provides a different template.
+
+Treat the template as a menu of allowed sections, not a mandatory checklist. Omit any section that would duplicate another section, require filler, or imply certainty the source material does not support.
 
 ## Workflow
 
 1. Analyze the user's source material before asking questions.
 2. Inspect referenced files or relevant code when available.
-3. Infer what is already reasonably clear: intent, scope, users, features, system shape, core concepts, implementation direction, tradeoffs, non-goals, risks, and missing decisions.
+3. Infer what is already reasonably clear: intent, scope, users, key capabilities, system shape, useful vocabulary, implementation direction, non-goals, risks, and missing decisions.
 4. Keep a running decision log for confirmed decisions, recommendations, open questions, deferred ideas, and assumptions.
 5. Ask one concise question at a time, choosing the unresolved question that would most improve the brief or unblock the next decision.
 6. Give an opinionated recommendation when enough context exists.
-7. Draft `BRIEF.md` once the project shape is clear enough; put remaining ambiguity in `Open Questions`.
+7. Draft `brief.md` once the project shape is clear enough; put remaining ambiguity in `Open Questions`.
 
 ## Conversation Rules
 
@@ -31,6 +46,8 @@ Read `brief-template.md` before drafting. Use it as the required structure for `
 - Use open-ended questions only when tradeoff exploration is needed.
 - Label recommended defaults as recommendations until confirmed.
 - Distinguish user decisions, confirmed recommendations, unconfirmed recommendations, assumptions, deferred ideas, and open questions.
+- When drafting from source material without Q&A, treat source statements as idea definition, assumptions, constraints, or recommended direction, not confirmed decisions.
+- Use `Confirmed Decisions` only for decisions explicitly made during the briefing conversation or when the user explicitly asks to preserve decisions from a prior artifact.
 
 Useful question format:
 
@@ -55,9 +72,26 @@ When something is ambiguous:
 
 Do not invent major requirements silently.
 
+## Section Boundaries
+
+Keep each section in its lane:
+
+- **Purpose**: A concise statement of what the project is meant to become and why it should exist. This replaces any separate intent section.
+- **Idea Definition**: A factual definition of what the project is and what it needs to do, without interpretation or references back to the source material.
+- **Recommended Direction**: Opinionated synthesis of the product and technical direction. Include implementation choices here only when they are central to the idea.
+- **Key Features**: The likely capabilities the first useful version needs.
+- **Non-Goals / Deferred Ideas**: Scope boundaries and later ideas.
+- **System Shape**: Main components or areas and their responsibilities.
+- **Core Concepts**: Shared vocabulary and domain terms only. Omit this section if the concepts merely repeat System Shape.
+- **Confirmed Decisions**: Only decisions explicitly made during the briefing conversation, or source decisions the user explicitly asks to preserve. Omit this section by default.
+- **Important Tradeoffs**: Only real alternatives with meaningful consequences. Omit this section if it would restate recommendations or obvious preferences.
+- **Open Questions**: Important unresolved questions that should not be silently decided.
+
+Never include a section only to satisfy the template.
+
 ## Drafting Threshold
 
-Draft the brief when the project intent, recommended direction, key features, non-goals, likely system shape, implementation direction, and important tradeoffs are clear enough to make a useful handoff.
+Draft the brief when the purpose, recommended direction, key features, non-goals, likely system shape, and open questions are clear enough to make a useful handoff.
 
 Do not wait for every small detail to be resolved.
 
@@ -65,14 +99,15 @@ Do not wait for every small detail to be resolved.
 
 When producing the brief:
 
-- Output one complete `BRIEF.md`.
+- Output one complete `brief.md`.
 - Use `brief-template.md`.
-- Keep it concise and decision-dense.
-- Include decisions made during the conversation.
+- Keep it concise, scannable, and decision-dense, but do not over-section the document.
+- Err toward bullets when a section would otherwise become a long paragraph or multiple paragraphs.
+- Do not create both `Purpose` and `Project Intent`; merge the idea's reason for existing into `Purpose`.
+- Include `Confirmed Decisions` only when decisions were actually made during the briefing conversation, or when the user explicitly asks to preserve prior decisions.
 - Clearly separate confirmed decisions from open questions.
-- Include notes that will help a later spec-writing agent.
 - Do not write `SPEC.md`, a build plan, phases, milestones, or tasks unless explicitly asked.
 
 ## Anti-Patterns
 
-Avoid broad question batches, generic best-practice filler, unnecessary neutrality, detailed task lists, implementation phases, and preserving ambiguity where a clear recommendation would help.
+Avoid broad question batches, generic best-practice filler, unnecessary neutrality, long essay-like sections, detailed task lists, implementation phases, preserving ambiguity where a clear recommendation would help, duplicative sections, invented tradeoffs, source-derived confirmed decisions, and confirmed-decision sections when no decision was made in the briefing conversation.

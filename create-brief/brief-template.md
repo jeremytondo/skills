@@ -2,37 +2,17 @@
 
 Status: Draft
 
-Purpose: <One-sentence summary of what this project is meant to become.>
+## Purpose
 
-## Source Summary
+<Concise statement of what the project is meant to become and why it should exist.>
 
-<Briefly summarize the original idea, notes, file, or discussion that led to this brief.>
+## Idea Definition
 
-## Project Intent
-
-<Explain what the project is trying to accomplish and why it matters.>
-
-The project exists to:
-
-- <Intent>
-- <Intent>
-- <Intent>
+<Define what the project is and what it needs to do. Keep this factual, direct, and free of references back to the source material.>
 
 ## Recommended Direction
 
-<Describe the recommended overall direction for the project based on the source material and discussion.>
-
-This direction is recommended because:
-
-- <Reason>
-- <Reason>
-- <Reason>
-
-## Key Decisions
-
-- <Confirmed decision>
-- <Confirmed decision>
-- <Confirmed decision>
+<Describe the opinionated product and technical direction. Include implementation choices only when they are central to the idea.>
 
 ## Key Features
 
@@ -46,59 +26,28 @@ This direction is recommended because:
 - <Non-goal or deferred idea>
 - <Non-goal or deferred idea>
 
-## Proposed System Shape
+## System Shape
 
 - **<Component / Area>**: <Responsibility>
 - **<Component / Area>**: <Responsibility>
 - **<Component / Area>**: <Responsibility>
 
+<!-- Optional: include only if shared vocabulary needs clarification. Omit if it repeats System Shape. -->
 ## Core Concepts
 
 - **<Concept>**: <Definition>
 - **<Concept>**: <Definition>
 - **<Concept>**: <Definition>
 
-## Implementation Direction
+<!-- Optional: include only if decisions were explicitly made during the briefing conversation, or if the user asks to preserve prior decisions. Omit by default. -->
+## Confirmed Decisions
 
-- Language:
-- Runtime:
-- Frameworks:
-- Data / persistence:
-- APIs / integrations:
-- Testing:
-- Deployment:
-- Other important implementation choices:
-
-## Important Tradeoffs
-
-- <Tradeoff>: <Selected or recommended direction>
-- <Tradeoff>: <Selected or recommended direction>
-- <Tradeoff>: <Selected or recommended direction>
+- <Confirmed decision>
+- <Confirmed decision>
+- <Confirmed decision>
 
 ## Open Questions
 
 - <Question>
 - <Question>
 - <Question>
-
-## Notes for Spec Authoring
-
-When creating the formal `SPEC.md`, emphasize:
-
-- <Important point>
-- <Important point>
-
-When creating the formal `SPEC.md`, avoid:
-
-- <Thing to avoid>
-- <Thing to avoid>
-
-Decisions that should become normative in the spec:
-
-- <Decision>
-- <Decision>
-
-Areas that should remain open or explicitly unresolved:
-
-- <Open area>
-- <Open area>
