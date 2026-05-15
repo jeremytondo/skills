@@ -9,7 +9,7 @@ Turn rough source material into a concise, opinionated, implementation-ready `sp
 
 Use this for greenfield or near-greenfield projects: no production users, no stable public contracts, and little existing behavior that must be preserved unless the user says otherwise.
 
-Act as a spec partner. Infer what is clear, surface what is not, recommend defaults when appropriate, and treat the spec as an agreement artifact.
+Act as a spec partner. Infer what is clear, surface what is not, and convert implementation-significant implied behavior into explicit requirements when safe to do so. Treat the spec as an agreement artifact: if two competent implementers could reasonably build different things from the current draft, either tighten the requirement or surface an open question.
 
 ## Workflow
 
@@ -32,13 +32,26 @@ Review relevant material before responding:
 - Existing code, if relevant and reasonably scoped.
 - `spec-template.md` unless the project provides a better template.
 
-Extract purpose, users, workflows, goals, non-goals, boundary, implementation preferences, domain entities, components, integrations, persistence needs, risks, ambiguities, and missing decisions.
+Extract:
+
+- Purpose, users, workflows, goals, non-goals, and project boundary.
+- Core domain entities, components, interfaces, integrations, persistence needs, and constraints.
+- Decisions that appear settled.
+- Behaviors that materially affect implementation, including behaviors that are implied rather than directly stated.
+- Risks, ambiguities, and places where multiple reasonable implementations would diverge.
 
 Do not ask the user to restate information that is already present or strongly implied.
+
+When behavior is implied but reasonably clear from the source material, convert it into explicit spec language. When behavior would materially affect implementation but cannot be safely inferred, surface it as an open question or research topic.
 
 ## Decision Inventory
 
 Before creating or editing `spec.md`, present:
+
+Use the inventory to distinguish:
+- settled decisions,
+- implementation-significant behavior you can safely codify now,
+- and implementation-significant uncertainty that still needs a decision or research.
 
 ```md
 ## What I Understand
@@ -124,7 +137,9 @@ If a new decision conflicts with existing `spec.md`, call out the conflict befor
 
 ## Drafting Threshold
 
-A useful first `spec.md` can usually be drafted when these are clear, recommended, or explicitly left open:
+A useful first `spec.md` can usually be drafted when the main project shape is clear and implementation-significant ambiguity is either resolved, recommended, or explicitly recorded as an open question.
+
+This usually means these are clear, recommended, or intentionally left open:
 
 - Purpose, boundary, goals, and non-goals.
 - Main components and core domain entities, or a decision to omit them.
@@ -134,9 +149,15 @@ A useful first `spec.md` can usually be drafted when these are clear, recommende
 
 Do not wait for every small detail. Capture non-blocking unknowns in `Open Questions`.
 
+Do not leave behavior implicit when it would materially change implementation. Either:
+- turn it into an explicit requirement, or
+- record it as an open question.
+
 ## spec.md Requirements
 
 The spec MUST be specific, decision-dense, concise, and normative. It MUST NOT become a build plan unless the user asks for one.
+
+The spec MUST make implementation-significant behavior explicit. It is not enough to summarize goals and architecture if important behavior is only implied. When the source material strongly implies a behavior, the spec SHOULD state it normatively. When multiple reasonable implementations remain possible, the spec MUST either resolve the behavior or record it in `Open Questions`.
 
 Use the project template when provided. Otherwise use `spec-template.md` and omit irrelevant sections.
 
@@ -158,6 +179,10 @@ Distinguish user-provided decisions, user-confirmed recommendations, agent-recom
 
 ## Final Checks
 
-Before returning a spec, verify that purpose, boundary, goals, non-goals, technology choices, components, domain names, responsibilities, open questions, acceptance criteria, verification, and definition of done are clear and consistent.
+Before returning a spec, verify that:
+
+- Purpose, boundary, goals, non-goals, technology choices, components, domain names, responsibilities, acceptance criteria, verification, and definition of done are clear and consistent.
+- Implementation-significant behavior is explicit enough that two competent implementers would be unlikely to build materially different versions.
+- Remaining ambiguity is captured as open questions rather than left implicit.
 
 When returning a draft, briefly summarize major assumptions, important open questions, and intentionally omitted sections outside the spec.
