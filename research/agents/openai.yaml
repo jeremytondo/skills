@@ -1,0 +1,4 @@
+interface:
+  display_name: "Research"
+  short_description: "Guide focused research into decisions"
+  default_prompt: "Use $research to investigate this topic and guide me toward a smart decision."

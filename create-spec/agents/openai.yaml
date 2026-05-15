@@ -1,0 +1,4 @@
+interface:
+  display_name: "Create Spec"
+  short_description: "Draft specs after surfacing open decisions"
+  default_prompt: "Use $create-spec to turn my notes into a spec.md after identifying open research and decision topics."
