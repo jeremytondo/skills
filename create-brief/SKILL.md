@@ -1,11 +1,11 @@
 ---
 name: create-brief
-description: Explore a rough project idea, notes, issue, design document, README, codebase context, or prior conversation and produce a concise BRIEF.md using the bundled brief-template.md. Use when the user wants an opinionated briefing conversation before writing a formal SPEC.md or build plan.
+description: Explore a rough project idea, notes, issue, design document, README, codebase context, or prior conversation and produce a concise brief.md using the bundled brief-template.md. Use when the user wants an opinionated briefing conversation before writing a formal SPEC.md or build plan.
 ---
 
 # Create Brief
 
-Use this skill to turn rough source material and discussion into a concise `BRIEF.md`.
+Use this skill to turn rough source material and discussion into a concise `brief.md`.
 
 The brief is a sharp synthesis artifact. It should clarify what the idea is, why it matters, what shape it appears to have, and what remains unresolved. It is not a formal spec, build plan, phase plan, milestone list, task breakdown, or spec-authoring guide.
 
