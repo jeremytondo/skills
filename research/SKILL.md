@@ -1,6 +1,6 @@
 ---
 name: research
-description: Guided research workflow for investigating a topic or list of topics, asking clarifying questions, reviewing relevant code or existing notes, synthesizing evidence, and helping the user reach clear answers or decisions. Use when the user asks to research, compare options, investigate uncertainty, evaluate tradeoffs, make a decision, or produce or append a research.md decision ledger from research findings.
+description: Guided research workflow for investigating a topic or list of topics, asking clarifying questions, reviewing relevant code or existing notes, synthesizing evidence, and helping the user reach clear answers or decisions. Use when the user asks to research, compare options, investigate uncertainty, evaluate tradeoffs, make a decision, or produce or append a lightweight research.md context document from research findings.
 ---
 
 # Research
@@ -57,47 +57,44 @@ Only proceed with writing after the user chooses how to handle the conflict or r
 
 ## Writing research.md
 
-Only create or update `research.md` when the user explicitly asks for a research document, written output, saving findings, appending to research, or documenting decisions.
+Only create or update `research.md` when the user explicitly asks for a research document, written output, saving findings, appending to research, or documenting research conclusions.
 
-Treat `research.md` as a decision ledger and research queue, not as free-form scratch space. It MUST be easy for the `create-spec` skill to find new decisions and incorporate them into `spec.md`.
+Treat `research.md` as readable research context, not as a stateful incorporation ledger. It should capture what was researched, why it mattered, important notes and tradeoffs, the conclusion reached if any, and unresolved questions.
+
+`research.md` owns research context. It does not own spec incorporation, build lifecycle, or implementation tracking state. Do not track whether research has been incorporated into `spec.md`, and do not maintain lifecycle/status fields unless the user explicitly asks for that.
 
 When writing:
 - Create `research.md` if it does not exist.
 - When creating a new file, use `research-template.md` from this skill folder as the starting structure.
 - If the file already exists, preserve existing content unless the user asks to rewrite or replace content.
-- Ensure the document has `## Decisions Made`, `## Open Topics`, and `## Assumptions` sections.
-- Add decided outcomes under `## Decisions Made`, not under a dated findings section.
-- Add unresolved research, decisions, or confirmations under `## Open Topics`.
-- Add provisional beliefs under `## Assumptions` when the user or future spec work may proceed before confirmation.
+- Ensure the document has a `## Topics` section.
+- For each topic, capture the question, context, notes, conclusion, and open questions.
+- Preserve useful research even when the conclusion is not ready for the current spec.
+- It is fine for conclusions to say something is future work, deferred, background context, not part of the initial build, or still unresolved.
 - Keep entries concise and useful for future decision-making.
+- Avoid heavy decision-database fields such as status, owner, incorporated notes, impact mappings, or lifecycle state unless the user requests them.
 
-Decision entries MUST use this status flow:
-
-```markdown
-- <Decision>
-  - Status: New | Incorporated | Superseded
-  - Date: YYYY-MM-DD
-  - Source: User-provided | User-confirmed | Agent-recommended | Research-supported
-  - Reason: <Why this decision was made>
-  - Alternatives considered: <Other options and why not chosen, or "None documented">
-  - Impact on spec: <Which spec sections or behavior this affects>
-  - Incorporated note: <Where/how it was incorporated, or "Not yet">
-```
-
-Use `Status: New` for decisions that have not yet been applied to `spec.md`. The `create-spec` skill is responsible for changing applicable entries to `Status: Incorporated` after it updates `spec.md`. Use `Status: Superseded` when a later decision replaces an earlier one.
-
-Open topic entries SHOULD use this structure:
+Topic entries SHOULD use this structure:
 
 ```markdown
-- [ ] <Topic name>
-  - Type: Research | Decision | Confirmation
-  - Blocking level: Blocking | Spec-shaping | Deferrable
-  - Why it matters: <Why this must be resolved or tracked>
-  - Needed answer: <Specific answer needed>
-  - Expert recommendation: <Recommended default or "None yet">
-  - Current assumption: <Assumption the spec would use if drafted now>
-  - Owner: User | Agent | External
-  - Evidence needed: <Docs, code inspection, prototype, user choice, etc.>
+### <Topic Name>
+
+Question:
+<What were we trying to answer?>
+
+Context:
+<Why this came up / what project decision it affects.>
+
+Notes:
+- <Important finding>
+- <Important tradeoff>
+- <Useful source, code observation, or reasoning>
+
+Conclusion:
+<The conclusion reached, if any. Say naturally whether this affects v1, should be deferred, is background context, or is not ready for the spec.>
+
+Open Questions:
+- <Question still unresolved>
 ```
 
 ## Response Style

@@ -16,9 +16,9 @@ Act as a spec partner. Infer what is clear, surface what is not, and convert imp
 1. Inspect source material.
 2. Present a decision inventory before creating or editing `spec.md`.
 3. Wait for the user to choose: draft, research, or answer decisions.
-4. If researching, create or update `research.md`.
+4. If researching, create or update `research.md` as lightweight research context.
 5. If drafting, create or update one `spec.md`.
-6. If applying research decisions, update `spec.md` and mark incorporated decisions in `research.md`.
+6. After drafting from research, include a temporary Research Coverage Check in the response.
 
 Skip the decision inventory only when the user explicitly asks to skip questions/checkpoints and draft immediately.
 
@@ -90,50 +90,56 @@ If enough information exists, offer to draft with assumptions and open questions
 
 ## research.md
 
-Use `research.md` only when the user asks to research, save the decision inventory, document open questions, or preserve decisions outside `spec.md`.
+Use `research.md` only when the user asks to research, save the decision inventory, document open questions, or preserve research context outside `spec.md`.
 
-When creating a new `research.md`, use `research-template.md` from the research skill if available. Otherwise create `## Decisions Made`, `## Open Topics`, and `## Assumptions`.
+Treat `research.md` as context, not as a stateful ledger. Read it before drafting or rewriting `spec.md`, but do not mutate it merely to mark research as incorporated.
 
-Decision format:
-
-```md
-- <Decision>
-  - Status: New | Incorporated | Superseded
-  - Date: YYYY-MM-DD
-  - Source: User-provided | User-confirmed | Agent-recommended | Research-supported
-  - Reason: <Why this decision was made>
-  - Alternatives considered: <Other options and why not chosen, or "None documented">
-  - Impact on spec: <Which spec sections or behavior this affects>
-  - Incorporated note: <Where/how it was incorporated, or "Not yet">
-```
-
-Open topic format:
-
-```md
-- [ ] <Topic name>
-  - Type: Research | Decision | Confirmation
-  - Blocking level: Blocking | Spec-shaping | Deferrable
-  - Why it matters: <brief reason>
-  - Needed answer: <specific answer needed>
-  - Expert recommendation: <recommendation or "None yet">
-  - Current assumption: <assumption or "None yet">
-  - Owner: User | Agent | External
-  - Evidence needed: <Docs, code inspection, prototype, user choice, etc.>
-```
+When creating a new `research.md`, use `research-template.md` from the research skill if available. Otherwise create a simple `## Topics` structure with topic entries that capture:
+- Question
+- Context
+- Notes
+- Conclusion
+- Open Questions
 
 Preserve existing notes and user-written content. Do not reorganize unrelated content unless asked.
 
-## Applying Decisions
+## Applying Research
 
-When drafting or updating `spec.md`, inspect `research.md` for `Status: New` decisions.
+When drafting or updating `spec.md`, inspect `research.md` for conclusions, tradeoffs, and unresolved questions.
 
-For each applicable `Status: New` decision:
+For each relevant research topic:
+- Infer which conclusions should affect the current spec.
+- Infer which conclusions should be mentioned as non-goals, deferred work, or future considerations.
+- Ignore background-only research unless it clarifies the spec.
+- Carry forward unresolved open questions that still affect implementation.
 
-- Incorporate it into `spec.md`.
-- Change `Status: New` to `Status: Incorporated`.
-- Set `Incorporated note` to the affected spec section or a brief explanation.
+Do not track whether research has been incorporated into `spec.md`. Do not add `Status: Incorporated`, incorporated notes, lifecycle state, or build tracking fields to `research.md` unless the user explicitly asks for that system.
 
-If a new decision conflicts with existing `spec.md`, call out the conflict before editing unless the user explicitly asked to apply it. If a later decision replaces an older one, mark the older entry `Status: Superseded`.
+If research conflicts with existing `spec.md`, call out the conflict before editing unless the user explicitly asked to rewrite the spec using current research.
+
+## Research Coverage Check
+
+After drafting or rewriting `spec.md` using `research.md`, include a temporary coverage check in the response. This check is response output only; do not write it into `research.md` unless the user asks.
+
+Use this structure:
+
+```md
+## Research Coverage Check
+
+Covered:
+- <Research conclusion reflected in the spec>
+
+Potentially missing:
+- <Spec-relevant conclusion that may not be covered>
+
+Deferred / background:
+- <Research conclusion that does not need current spec coverage>
+
+Open questions:
+- <Unresolved research question that still affects the spec>
+```
+
+Keep the coverage check short. It should help the user see how research shaped the spec without creating a new tracking system.
 
 ## Drafting Threshold
 
