@@ -1,6 +1,6 @@
 # Research
 
-Purpose: Capture research context, conclusions, and unresolved questions that may inform the project.
+Purpose: Capture research context, findings, recommendations, and unresolved questions for future review.
 
 ## Topics
 
@@ -12,13 +12,22 @@ Question:
 Context:
 <Why this came up / what project decision it affects.>
 
-Notes:
+Findings:
 - <Important finding>
-- <Important tradeoff>
 - <Useful source, code observation, or reasoning>
 
-Conclusion:
-<The conclusion reached, if any. Say naturally whether this affects v1, should be deferred, is background context, or is not ready for the spec.>
+Recommendation:
+<The recommended path, if any. Say naturally whether this affects the current work, should be deferred, is background context, or is still unresolved.>
+
+Rationale / Tradeoffs:
+- <Why this recommendation makes sense>
+- <Important tradeoff, risk, or caveat>
+
+Assumptions:
+- <Assumption behind the recommendation>
 
 Open Questions:
 - <Question still unresolved>
+
+Sources:
+- <External source, file, issue, or code reference used>
