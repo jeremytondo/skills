@@ -1,6 +1,6 @@
 ---
 name: research
-description: Conversational research support for investigating a topic or list of topics, asking focused questions, reviewing relevant code or existing notes, synthesizing evidence, recommending a path, and drafting lightweight markdown research and recommendations for review. Use when the user asks to research, compare options, investigate uncertainty, evaluate tradeoffs, make a decision, or create/update a research.md context document.
+description: Conversational research support for investigating a topic or list of topics, asking focused questions, reviewing relevant code or existing notes, synthesizing evidence, recommending a path, and drafting lightweight markdown research and recommendations for review. Use when the user asks to research, compare options, investigate uncertainty, evaluate tradeoffs, make a decision, or create/update a <slug>.research.md context document.
 ---
 
 # Research
@@ -58,35 +58,29 @@ Be willing to give an expert provisional recommendation before every detail is k
 
 When wrapping up a research thread, synthesize findings into facts, assumptions, tradeoffs, and recommendations as useful. Suggest a lightweight validation step when uncertainty is meaningful.
 
-## Existing Research
+## Research Documents
 
-Before writing to `research.md`, check whether a relevant `research.md` already exists in the working area.
+Use one markdown file per research area by default. Name each file `<slug>.research.md`, where `<slug>` is a short lowercase kebab-case description of the research area, usually 2-5 words, such as `oauth-provider-options.research.md`.
 
-If it exists:
-- Read it before drafting new output.
-- Compare existing findings with the new research.
-- Identify conflicts, stale conclusions, duplicated sections, or recommendations that would become inconsistent.
-- If there are conflicts or meaningful redundancy, stop before writing and tell the user:
-  - what conflicts or overlaps,
-  - why it matters,
-  - recommended resolution,
-  - available choices, such as append as-is, append with a correction note, replace/update the conflicting section, or keep the new research separate.
+Only create or update a `.research.md` file when the user explicitly asks for a research document, written output, saving findings, appending to research, drafting markdown, or documenting research conclusions. Ordinary research conversation should not write files.
 
-Only proceed with writing after the user chooses how to handle the conflict or redundancy.
+Keep research files in the current working area unless the user requests another location. Do not create a folder or index unless the user asks for one.
 
-## Drafting research.md
+Treat each `.research.md` file as readable research context and recommendations for one research area, not as a stateful incorporation ledger. It should capture what was researched, why it mattered, findings, recommendations, rationale, tradeoffs, assumptions, sources when relevant, and unresolved questions.
 
-Only create or update `research.md` when the user explicitly asks for a research document, written output, saving findings, appending to research, drafting markdown, or documenting research conclusions.
+Research files own research context. They do not own spec incorporation, build lifecycle, or implementation tracking state. Do not track whether research has been incorporated into `spec.md`, and do not maintain lifecycle/status fields unless the user explicitly asks for that.
 
-Treat `research.md` as readable research context and recommendations, not as a stateful incorporation ledger. It should capture what was researched, why it mattered, findings, recommendations, rationale, tradeoffs, assumptions, sources when relevant, and unresolved questions.
-
-`research.md` owns research context. It does not own spec incorporation, build lifecycle, or implementation tracking state. Do not track whether research has been incorporated into `spec.md`, and do not maintain lifecycle/status fields unless the user explicitly asks for that.
+## Naming and Existing Files
 
 When writing:
-- Create `research.md` if it does not exist.
+- Derive the slug from the research area title.
+- Prefer a short descriptive slug, usually 2-5 words.
+- Create `<slug>.research.md` if no matching file exists.
+- If the same-name `.research.md` file exists, read it before writing.
+- Update the same-name file only if it is clearly the same research area.
+- If the same-name file is unrelated, choose a more specific slug and tell the user.
 - When creating a new file, use `research-template.md` from this skill folder as the starting structure.
 - If the file already exists, preserve existing content unless the user asks to rewrite or replace content.
-- Ensure the document has a `## Topics` section.
 - For each topic, capture the question, context, findings, recommendation, rationale/tradeoffs, assumptions, open questions, and sources when useful.
 - Preserve useful research even when the conclusion is not ready to drive a decision.
 - It is fine for conclusions to say something is future work, deferred, background context, outside the current decision, or still unresolved.

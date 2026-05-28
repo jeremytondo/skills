@@ -1,6 +1,6 @@
 # Research
 
-Purpose: Capture research context, findings, recommendations, and unresolved questions for future review.
+Purpose: Capture research context, findings, recommendations, and unresolved questions for one research area.
 
 ## Topics
 

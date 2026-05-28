@@ -1,6 +1,6 @@
 ---
 name: create-spec
-description: Create implementation-ready spec.md documents from rough project ideas, notes, briefs, design docs, GitHub issues, READMEs, prototypes, existing research.md files, or early codebases. Use when turning uncertain greenfield or near-greenfield project context into a decision-dense specification, first identifying open research and decision topics before drafting.
+description: Create implementation-ready spec.md documents from rough project ideas, notes, briefs, design docs, GitHub issues, READMEs, prototypes, existing *.research.md files, or early codebases. Use when turning uncertain greenfield or near-greenfield project context into a decision-dense specification, first identifying open research and decision topics before drafting.
 ---
 
 # Create Spec
@@ -16,7 +16,7 @@ Act as a spec partner. Infer what is clear, surface what is not, and convert imp
 1. Inspect source material.
 2. Present a decision inventory before creating or editing `spec.md`.
 3. Wait for the user to choose: draft, research, or answer decisions.
-4. If researching, create or update `research.md` as lightweight research context.
+4. If researching, create or update a relevant `<slug>.research.md` file as lightweight research context.
 5. If drafting, create or update one `spec.md`.
 6. After drafting from research, include a temporary Research Coverage Check in the response.
 
@@ -28,7 +28,7 @@ Review relevant material before responding:
 
 - User prompt and prior conversation context.
 - Linked briefs, notes, issues, READMEs, design docs, or prototypes.
-- Existing `research.md`, if present.
+- Relevant `*.research.md` files, if present.
 - Existing code, if relevant and reasonably scoped.
 - `spec-template.md` unless the project provides a better template.
 
@@ -88,38 +88,41 @@ Blocking levels:
 
 If enough information exists, offer to draft with assumptions and open questions. If not, say what research or decisions are needed first.
 
-## research.md
+## Research Documents
 
-Use `research.md` only when the user asks to research, save the decision inventory, document open questions, or preserve research context outside `spec.md`.
+Use `<slug>.research.md` files when the user asks to research, save the decision inventory, document open questions, or preserve research context outside `spec.md`.
 
-Treat `research.md` as context, not as a stateful ledger. Read it before drafting or rewriting `spec.md`, but do not mutate it merely to mark research as incorporated.
+Treat research files as context, not as a stateful ledger. Read relevant `*.research.md` files before drafting or rewriting `spec.md`, but do not mutate them merely to mark research as incorporated.
 
-When creating a new `research.md`, use `research-template.md` from the research skill if available. Otherwise create a simple `## Topics` structure with topic entries that capture:
+When creating a new research file, name it `<slug>.research.md`, using a short lowercase kebab-case slug for the research area. Use `research-template.md` from the research skill if available. Otherwise create a simple `## Topics` structure with topic entries that capture:
 - Question
 - Context
-- Notes
-- Conclusion
+- Findings
+- Recommendation
+- Rationale / Tradeoffs
+- Assumptions
 - Open Questions
+- Sources when relevant
 
 Preserve existing notes and user-written content. Do not reorganize unrelated content unless asked.
 
 ## Applying Research
 
-When drafting or updating `spec.md`, inspect `research.md` for conclusions, tradeoffs, and unresolved questions.
+When drafting or updating `spec.md`, inspect relevant `*.research.md` files for recommendations, tradeoffs, and unresolved questions.
 
 For each relevant research topic:
-- Infer which conclusions should affect the current spec.
-- Infer which conclusions should be mentioned as non-goals, deferred work, or future considerations.
+- Infer which recommendations should affect the current spec.
+- Infer which findings or recommendations should be mentioned as non-goals, deferred work, or future considerations.
 - Ignore background-only research unless it clarifies the spec.
 - Carry forward unresolved open questions that still affect implementation.
 
-Do not track whether research has been incorporated into `spec.md`. Do not add `Status: Incorporated`, incorporated notes, lifecycle state, or build tracking fields to `research.md` unless the user explicitly asks for that system.
+Do not track whether research has been incorporated into `spec.md`. Do not add `Status: Incorporated`, incorporated notes, lifecycle state, or build tracking fields to research files unless the user explicitly asks for that system.
 
 If research conflicts with existing `spec.md`, call out the conflict before editing unless the user explicitly asked to rewrite the spec using current research.
 
 ## Research Coverage Check
 
-After drafting or rewriting `spec.md` using `research.md`, include a temporary coverage check in the response. This check is response output only; do not write it into `research.md` unless the user asks.
+After drafting or rewriting `spec.md` using research files, include a temporary coverage check in the response. This check is response output only; do not write it into research files unless the user asks.
 
 Use this structure:
 
