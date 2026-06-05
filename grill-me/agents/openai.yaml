@@ -1,0 +1,4 @@
+interface:
+  display_name: "Grill Me"
+  short_description: "Stress-test plans against project language"
+  default_prompt: "Use $grill-me to stress-test this plan against the project domain model and capture resolved terms or ADRs."
