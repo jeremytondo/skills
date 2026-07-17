@@ -1,4 +1,4 @@
 interface:
   display_name: "Grill Me"
-  short_description: "Stress-test plans against project language"
-  default_prompt: "Use $grill-me to stress-test this plan against the project domain model and capture resolved terms or ADRs."
+  short_description: "Develop a shared understanding of a plan"
+  default_prompt: "Use $grill-me to develop a shared understanding of this plan, work through its design branches one question at a time, and capture the conclusions in the handoff I request."
