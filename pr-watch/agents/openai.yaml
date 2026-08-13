@@ -1,0 +1,4 @@
+interface:
+  display_name: "PR Watch"
+  short_description: "Watch and address pull request feedback"
+  default_prompt: "Use $pr-watch to watch this pull request, assess reviewer feedback, make appropriate changes, and continue until the review converges."
