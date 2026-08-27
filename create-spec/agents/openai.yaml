@@ -1,4 +1,4 @@
 interface:
   display_name: "Create Spec"
-  short_description: "Draft specs from notes and research"
-  default_prompt: "Use $create-spec to turn my notes and docs/research.md into a decision-ready docs/spec.md."
+  short_description: "Turn a grilled Linear brief into a spec"
+  default_prompt: "Use $create-spec to replace the grilled Linear brief in this conversation with an implementation-ready specification."

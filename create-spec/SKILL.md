@@ -1,152 +1,68 @@
 ---
 name: create-spec
-description: Create implementation-ready docs/spec.md specifications from rough project ideas, notes, briefs, design docs, GitHub issues, READMEs, prototypes, docs/research.md, or early codebases. Use when turning uncertain greenfield or near-greenfield project context into a decision-dense specification, first identifying open research and decision topics before drafting.
+description: Turn a completed grilling session for a Linear brief into an implementation-ready specification by replacing the brief on the same ticket. Use after the grill has reached confirmed shared understanding.
 ---
 
 # Create Spec
 
-Turn rough source material into a concise, opinionated, implementation-ready `docs/spec.md`.
+Turn a completed grilling session into a concise, implementation-ready specification on the same Linear ticket. This is a synthesis step: do not interview the user or reopen settled decisions.
 
-Use this for greenfield or near-greenfield projects: no production users, no stable public contracts, and little existing behavior that must be preserved unless the user says otherwise.
+Read `spec-template.md` before writing. Use only the sections that help define the work.
 
-Act as a spec partner. Infer what is clear, surface what is not, and convert implementation-significant implied behavior into explicit requirements when safe to do so. Treat the spec as an agreement artifact: if two competent implementers could reasonably build different things from the current draft, either tighten the requirement or surface an open question.
+## Preconditions
 
-## Workflow
+- The Linear issue is identified in the request or current conversation.
+- The issue is labeled `brief`.
+- The grill for that issue is complete and the user has confirmed shared understanding.
 
-Use the git root as the project root when available; otherwise use the current working directory.
+If the target issue is missing, ask only for the issue identifier. If the issue is not a brief or the grill is not complete, explain what is missing and stop without modifying Linear.
 
-1. Inspect source material.
-2. Present a decision inventory before creating or editing `docs/spec.md`.
-3. Wait for the user to choose: draft, research, or answer decisions.
-4. If researching, stay in research/decision mode until the direction is clear enough to draft.
-5. If saving research, update only `docs/research.md`.
-6. If drafting, create or update the top-level `docs/spec.md`, creating `docs/` if needed.
+## Process
 
-Skip the decision inventory only when the user explicitly asks to skip questions/checkpoints and draft immediately.
+1. Retrieve the Linear brief and read the completed grilling conversation.
+2. Reuse repository understanding established during the grill. If needed, inspect narrowly relevant code, domain glossaries, tests, and ADRs to verify facts. Use the project's existing vocabulary and architectural constraints throughout the spec.
+3. Synthesize the brief and grill conclusions into one complete specification using the template.
+4. Check that the specification contains no silent implementation-significant ambiguity. If the sources contain a genuine contradiction or blocking decision, stop and identify it rather than inventing an answer. Keep only safely deferrable questions in `Open Questions`.
+5. Replace the Linear issue description with the specification. Preserve the issue title, comments, project, status, and other unrelated fields. Add the `spec` label and remove the `brief` label.
+6. Return the ticket identifier and link.
 
-## Inspect
+Do not create a new issue, create `docs/spec.md`, produce a decision inventory, begin a research workflow, or turn the spec into phases, milestones, or implementation tasks.
 
-Review relevant material before responding:
+## Writing
 
-- User prompt and prior conversation context.
-- Linked briefs, notes, issues, READMEs, design docs, or prototypes.
-- The top-level `docs/research.md`, if present.
-- An existing `docs/spec.md`, if present.
-- Existing code, if relevant and reasonably scoped.
-- `spec-template.md` unless the project provides a better template.
+Treat the brief as the starting shape and the grill as the source of resolved design decisions:
 
-Extract:
+- Turn the brief's idea into the problem and agreed solution.
+- Turn its scope into user stories, behavioral requirements, and acceptance criteria.
+- Turn its direction and the grill's conclusions into implementation decisions.
+- Expand system shape into responsibilities, boundaries, interfaces, state, and data contracts when relevant.
+- Turn deferred ideas into explicit out-of-scope statements.
+- Incorporate confirmed decisions where they apply instead of preserving a detached decision log.
 
-- Purpose, users, workflows, goals, non-goals, and project boundary.
-- Core domain entities, components, interfaces, integrations, persistence needs, and constraints.
-- Decisions that appear settled.
-- Implementation-significant behavior, including behavior implied rather than directly stated.
-- Risks, ambiguities, and places where multiple reasonable implementations would diverge.
+Make implementation-significant behavior explicit. If two competent implementers could reasonably produce materially different behavior, state the contract supported by the resolved decisions. If the difference is unresolved, stop when it blocks implementation; otherwise preserve it as an open question.
 
-Do not ask the user to restate information that is already present or strongly implied.
+- Use simple, direct language and the project's canonical domain terms.
+- Use `MUST`, `MUST NOT`, and `SHOULD` when a requirement needs normative force.
+- Keep user stories broad enough to cover distinct actors, workflows, permissions, and important edge cases, but do not make them exhaustive for their own sake.
+- Describe observable behavior, validation, failure handling, permissions, and state transitions when they affect implementation.
+- Record architectural areas, responsibilities, interfaces, schema changes, API contracts, and technical constraints decided during the grill.
+- Do not include specific file paths or ordinary code snippets; they become stale quickly. A short schema, type shape, state machine, reducer, or reference algorithm is acceptable when it captures a confirmed decision more precisely than prose.
+- Omit empty, repetitive, speculative, or irrelevant sections.
+- Do not invent requirements to make the spec appear complete.
 
-When implementation-significant behavior cannot be safely inferred, surface it as an open question or research topic.
+## Testing Decisions
 
-## Decision Inventory
+Record how the important behavior will be verified. Prefer an existing test seam to a new one and the highest practical seam that observes the contract, such as a user workflow, public interface, or API boundary rather than private implementation details.
 
-Before creating or editing `docs/spec.md`, present:
+Include relevant existing test precedent, success paths, failure paths, and edge cases. Do not ask for a separate testing-seam confirmation unless the completed grill left a blocking conflict about how the behavior can be verified.
 
-Use the inventory to distinguish:
-- settled decisions,
-- behavior you can safely codify now,
-- uncertainty that still needs a decision or research,
-- and assumptions you would make if drafting now.
+## Final Check
 
-```md
-## What I Understand
+Before updating Linear, verify that:
 
-- <Concrete fact or strong inference>
-
-## Decisions Already Made
-
-- <Decision> (Source: User-provided | Strongly implied | Agent-recommended default)
-
-## Open Questions
-
-- <Question> - <Blocking | Spec-shaping | Deferrable>
-  - Why it matters: <brief reason, when useful>
-  - Recommendation: <recommended default, when useful>
-
-## Assumptions If Drafted Now
-
-- <Assumption> (Consequence if wrong: <brief impact>)
-
-I <do/do not> have enough information to draft a useful first `docs/spec.md`.
-```
-
-Blocking levels:
-
-- `Blocking`: must be answered before a useful spec.
-- `Spec-shaping`: draftable, but answer may significantly change the spec.
-- `Deferrable`: safe to capture as an open question.
-
-If enough information exists, offer to draft with assumptions and open questions. If not, say what research or decisions are needed first.
-
-## Research
-
-Use the top-level `docs/research.md` as the only persistent research artifact.
-
-Read relevant `docs/research.md` content before drafting or rewriting `docs/spec.md`. Apply recommendations, tradeoffs, and unresolved questions that affect the spec; ignore background-only research unless it clarifies implementation behavior.
-
-Only create or update `docs/research.md` when the user explicitly asks to save, summarize, document, write down, or add the research. Follow the research skill's simple dated section shape. Preserve useful existing notes; update an existing section when the new research clearly belongs there, otherwise append a new section.
-
-Do not track whether research has been incorporated into `docs/spec.md`. Do not add status fields, lifecycle state, or build tracking fields to research files unless the user explicitly asks for that system.
-
-If research conflicts with an existing spec, call out the conflict before editing unless the user explicitly asked to rewrite the spec using current research.
-
-## Drafting Threshold
-
-A useful first `docs/spec.md` can usually be drafted when the main project shape is clear and implementation-significant ambiguity is either resolved, recommended, or explicitly recorded as an open question.
-
-This usually means these are clear, recommended, or intentionally left open:
-
-- Purpose, boundary, goals, and non-goals.
-- Main components and core domain entities, or a decision to omit them.
-- Implementation profile.
-- Important integrations and persistence needs.
-- Acceptance criteria and verification expectations.
-
-Do not wait for every small detail. Capture non-blocking unknowns in `Open Questions`.
-
-Do not leave behavior implicit when it would materially change implementation. Either:
-- turn it into an explicit requirement, or
-- record it as an open question.
-
-## docs/spec.md Requirements
-
-The spec MUST be specific, decision-dense, concise, and normative. It MUST NOT become a build plan unless the user asks for one.
-
-The spec MUST make implementation-significant behavior explicit. When the source material strongly implies behavior, state it normatively. When multiple reasonable implementations remain possible, resolve the behavior or record it in `Open Questions`.
-
-Use the project template when provided. Otherwise use `spec-template.md` and omit irrelevant sections.
-
-Include relevant sections for purpose, problem, goals/non-goals, boundary, Implementation Profile, system overview, domain model, components, interfaces, cross-cutting requirements, acceptance criteria, verification, definition of done, and open questions.
-
-Implementation Profile is normative. Capture language/version, dependencies, storage, testing, target platform, project type, performance goals, constraints, scale/scope, repository layout, dependency policy, and implementation rules.
-
-Use `Reference Algorithms` only when prose is likely to be implemented incorrectly without pseudocode.
-
-## Style
-
-Use RFC 2119 terms: `MUST`, `MUST NOT`, `REQUIRED`, `SHOULD`, `SHOULD NOT`, `RECOMMENDED`, `MAY`, and `OPTIONAL`.
-
-Prefer compact bullets, concrete contracts, explicit boundaries, concrete data models, failure behavior, and specific open questions.
-
-Avoid marketing language, generic filler, implementation phases, milestones, file-by-file task plans, repeated requirements, and abstract architecture that does not map to implementation behavior.
-
-Distinguish user-provided decisions, user-confirmed recommendations, agent-recommended defaults, open questions, assumptions, and deferred decisions.
-
-## Final Checks
-
-Before returning a spec, verify that:
-
-- Purpose, boundary, goals, non-goals, technology choices, components, domain names, responsibilities, acceptance criteria, verification, and definition of done are clear and consistent.
-- Implementation-significant behavior is explicit enough that two competent implementers would be unlikely to build materially different versions.
-- Remaining ambiguity is captured as open questions rather than left implicit.
-
-When returning a draft, briefly summarize major assumptions, important open questions, and intentionally omitted sections outside the spec.
+- The problem, solution, boundaries, and terminology are consistent.
+- Every grill conclusion that affects implementation appears in the relevant requirement or decision.
+- Acceptance criteria describe independently observable outcomes.
+- Testing decisions verify external behavior rather than internal structure.
+- Remaining open questions are safe to defer.
+- The document is a specification, not a transcript, decision log, or build plan.
