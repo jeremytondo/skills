@@ -1,5 +1,3 @@
-# <Project Name> Brief
-
 Status: Draft
 
 ## Idea
