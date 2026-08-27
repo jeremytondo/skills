@@ -2,38 +2,22 @@
 
 Status: Draft
 
-## Purpose
+## Idea
 
-<Concise statement of what the project is meant to become and why it should exist.>
+<Explain what the idea is, who it is for, and why it matters.>
 
-## Idea Definition
+## Direction
 
-<Define what the project is and what it needs to do. Keep this factual, direct, and free of references back to the source material.>
+<Describe the recommended approach and any meaningful alternatives or tradeoffs.>
 
-## Recommended Direction
+## Scope
 
-<Describe the opinionated product and technical direction. Include implementation choices only when they are central to the idea.>
+- <Important capability or boundary>
 
-## Key Features
+## Deferred
 
-- <Feature>
-
-## Non-Goals / Deferred Ideas
-
-- <Non-goal or deferred idea>
-
-## System Shape
-
-- **<Component / Area>**: <Responsibility>
-
-## Core Concepts
-
-- **<Concept>**: <Definition>
-
-## Confirmed Decisions
-
-- <Confirmed decision>
+- <Option, decision, or idea intentionally left for later>
 
 ## Open Questions
 
-- <Question>
+- <Important unresolved question>
