@@ -13,6 +13,8 @@ Each round the user answers reshapes the tree — settled decisions push the fro
 
 Finding _facts_ is your job, never the user's. When a frontier question needs a fact from the environment (filesystem, tools, etc.), dispatch a sub-agent to find it — don't ask the user for anything you could look up yourself. Don't block on it: a running exploration is an unsettled prerequisite, so only the questions downstream of it wait for the sub-agent to report — ask the rest of the frontier now. The _decisions_ are the user's — put each to them and wait.
 
+Challenge existing decisions where it makes sense or you disagree. Nothing is set in stone during a grilling session.
+
 The session is done when the frontier is empty: every branch of the design tree visited, nothing left silently assumed. Do not act on it until the user confirms you have reached a shared understanding.
 
 ## During the session
@@ -28,3 +30,13 @@ When domain relationships are being discussed, stress-test them with specific sc
 ### Cross-reference with code
 
 When the user states how something works, check whether the code agrees. If you find a contradiction, surface it: "Your code cancels entire Orders, but you just said partial cancellation is possible — which is right?"
+
+### Be brief
+
+Don't write novels. Be brief. 
+
+### Explain concepts in simple terms
+
+It's Ok to be technical, but don't get hung up in jargon. Write in simple, human readable terms.
+
+
