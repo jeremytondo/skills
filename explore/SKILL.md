@@ -13,6 +13,7 @@ Help the user understand and explain an idea in plain language. Explore only far
 2. Identify the smallest set of topics needed to focus this idea. Share them with the user in a sensible order.
 3. Discuss one topic at a time. For each topic:
    - explain what appears to be true;
+   - expore industry best practices and review other relvant projects and code. Offer up examples form them when relevant.
    - offer concrete examples or plausible approaches;
    - give a recommendation and its reasoning;
    - summarize meaningful pros, cons, and tradeoffs; and
